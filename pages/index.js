@@ -1,18 +1,35 @@
-// pages/index.js
-import Head from 'next/head';
-import CameraCapture from '../components/CameraCapture';
+import React, { useState } from 'react';
+import Camera from '../components/Camera';
+import Upload from '../components/Upload';
+import Transcribe from '../components/Transcribe';
+import GenerateImage from '../components/GenerateImage';
 
-export default function Home() {
+const Home = () => {
+  const [imageSrc, setImageSrc] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
+  const [transcription, setTranscription] = useState('');
+  const [generatedImageSrc, setGeneratedImageSrc] = useState(null);
+
   return (
     <div>
-      <Head>
-        <title>AI Camera App</title>
-        <meta name="description" content="Capture and transcribe images, then generate new images with AI" />
-      </Head>
-      <main className="flex flex-col items-center justify-center min-h-screen p-4">
-        <h1 className="text-3xl mb-6">AI Camera App</h1>
-        <CameraCapture />
-      </main>
+      <Camera setImageSrc={setImageSrc} />
+      <Upload imageSrc={imageSrc} setImageUrl={setImageUrl} />
+      <Transcribe imageUrl={imageUrl} setTranscription={setTranscription} />
+      <GenerateImage transcription={transcription} setGeneratedImageSrc={setGeneratedImageSrc} />
+      {transcription && (
+        <div>
+          <h2>Transcription:</h2>
+          <p>{transcription}</p>
+        </div>
+      )}
+      {generatedImageSrc && (
+        <div>
+          <h2>Generated Image:</h2>
+          <img src={generatedImageSrc} alt="Generated" />
+        </div>
+      )}
     </div>
   );
-}
+};
+
+export default Home;
