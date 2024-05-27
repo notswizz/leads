@@ -1,25 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Upload = ({ imageSrc, setImageUrl }) => {
-  const uploadImage = async () => {
-    const response = await fetch('/api/upload', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ image: imageSrc }),
-    });
+  const [isUploading, setIsUploading] = useState(false);
 
-    const data = await response.json();
-    setImageUrl(data.imageUrl);
+  const uploadImage = async () => {
+    setIsUploading(true);
+    try {
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ image: imageSrc }),
+      });
+
+      const data = await response.json();
+      setImageUrl(data.imageUrl);
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center space-y-4 mt-4">
       {imageSrc && (
         <>
-          <img src={imageSrc} alt="Captured" />
-          <button onClick={uploadImage}>Upload Image</button>
+          <img
+            src={imageSrc}
+            alt="Captured"
+            className="w-full max-w-md rounded-lg shadow-lg"
+          />
+          <button
+            onClick={uploadImage}
+            disabled={isUploading}
+            className={`px-4 py-2 rounded-lg shadow transition ${
+              isUploading
+                ? 'bg-gray-400 cursor-not-allowed'
+                : 'bg-green-500 text-white hover:bg-green-600'
+            }`}
+          >
+            {isUploading ? 'Uploading...' : 'Upload Image'}
+          </button>
         </>
       )}
     </div>
