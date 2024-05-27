@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 const Camera = ({ setImageSrc }) => {
-  const fileInputRef = React.useRef(null);
+  const fileInputRef = useRef(null);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
