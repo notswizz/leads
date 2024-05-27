@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <div className="container mx-auto p-4">
       <div className="flex flex-col items-center space-y-8">
-        <h1 className="text-3xl font-bold text-center mb-8">AI Photo</h1>
+        <h1 className="text-3xl font-bold text-center mb-8">Image Capture and Processing</h1>
         <Camera setImageSrc={setImageSrc} />
         <Upload imageSrc={imageSrc} setImageUrl={setImageUrl} />
         <Transcribe imageUrl={imageUrl} setTranscription={setTranscription} />

@@ -16,7 +16,15 @@ const Camera = ({ setImageSrc }) => {
 
   return (
     <div className="flex flex-col items-center space-y-4">
-     
+      <div className="relative w-full max-w-md overflow-hidden rounded-lg shadow-lg">
+        {fileInputRef.current && fileInputRef.current.files.length > 0 && (
+          <img
+            src={URL.createObjectURL(fileInputRef.current.files[0])}
+            alt="Captured"
+            className="w-full rounded-lg"
+          />
+        )}
+      </div>
       <input
         type="file"
         accept="image/*"

@@ -24,18 +24,18 @@ const Upload = ({ imageSrc, setImageUrl }) => {
   };
 
   return (
-    <div className="flex flex-col items-center space-y-4 mt-4">
+    <div className="flex flex-col items-center space-y-4 mt-4 w-full">
       {imageSrc && (
         <>
           <img
             src={imageSrc}
             alt="Captured"
-            className="w-full max-w-md rounded-lg shadow-lg"
+            className="w-full max-w-md rounded-lg shadow-lg object-cover"
           />
           <button
             onClick={uploadImage}
             disabled={isUploading}
-            className={`px-4 py-2 rounded-lg shadow transition ${
+            className={`w-full max-w-md px-4 py-2 rounded-lg shadow transition ${
               isUploading
                 ? 'bg-gray-400 cursor-not-allowed'
                 : 'bg-green-500 text-white hover:bg-green-600'
