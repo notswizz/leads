@@ -8,7 +8,7 @@ const GenerateImage = ({ transcription, filter, setGeneratedImageSrc }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt: transcription, filter }),
+        body: JSON.stringify({ prompt: transcription, filter: filter }),
       });
 
       const data = await response.json();
