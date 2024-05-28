@@ -39,7 +39,13 @@ const PostDisplay = () => {
   }
 
   return (
-    <div className="max-h-96 overflow-y-auto p-4 bg-gray-900 rounded-lg shadow-inner">
+    <div className="max-h-screen overflow-y-auto p-4 bg-gray-900 rounded-lg shadow-inner">
+      <button
+        onClick={() => setShowPostFeed(!showPostFeed)}
+        className="w-full px-4 py-2 bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-full shadow-md hover:from-gray-600 hover:to-gray-800 transition-transform transform hover:scale-105 text-xl font-bold text-center border-2 border-gray-600 overflow-hidden mb-4"
+      >
+      
+      </button>
       <div className="space-y-6">
         {posts.map((post) => (
           <div key={post._id} className="bg-gray-800 p-6 rounded-lg shadow-lg space-y-4">
@@ -53,7 +59,7 @@ const PostDisplay = () => {
             <div className="flex justify-center space-x-4 mt-4">
               <button
                 onClick={() => toggleImage(post._id)}
-                className={`w-full px-6 py-3 bg-gradient-to-r from-purple-500 via-red-500 to-yellow-500 text-white rounded-full shadow-lg hover:from-purple-600 hover:via-red-600 hover:to-yellow-600 transition-transform transform hover:scale-105 text-2xl font-extrabold text-center border-4 border-green-500 overflow-hidden`}
+                className={`w-full px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-full shadow-md hover:from-gray-600 hover:to-gray-800 transition-transform transform hover:scale-105 text-xl font-bold text-center border-2 border-gray-600 overflow-hidden`}
               >
                 <div className="relative whitespace-nowrap">
                   {showGeneratedImages[post._id] ? 'Show Original' : 'Show AI'}
