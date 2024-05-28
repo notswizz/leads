@@ -6,11 +6,12 @@ const openai = new OpenAI({
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { prompt } = req.body;
+    const { prompt, filter } = req.body;
 
     try {
       const response = await openai.images.generate({
-        prompt: prompt,
+        model: "dall-e-3",
+        prompt: `heavily emphasize filter: ${filter}. ${prompt}`,
         n: 1,
         size: "1024x1024",
       });

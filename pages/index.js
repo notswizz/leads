@@ -77,7 +77,7 @@ const Home = () => {
           )}
           {transcription && (
             <div className="text-center mt-4 p-4 bg-gray-100 rounded-lg shadow-lg max-h-32 overflow-y-auto">
-            
+              <h2 className="text-xl font-semibold mb-2">Transcription:</h2>
               <p className="mt-2 text-gray-700">{transcription}</p>
             </div>
           )}
