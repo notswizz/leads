@@ -8,6 +8,7 @@ const Upload = ({ imageSrc, setImageUrl, setSelectedFilter }) => {
 
   const uploadImage = async () => {
     setIsUploading(true);
+    console.log('Uploading image...');
     try {
       const response = await fetch('/api/upload', {
         method: 'POST',
@@ -18,6 +19,7 @@ const Upload = ({ imageSrc, setImageUrl, setSelectedFilter }) => {
       });
 
       const data = await response.json();
+      console.log('Image uploaded:', data.imageUrl);
       setImageUrl(data.imageUrl);
       setIsUploaded(true);
     } catch (error) {

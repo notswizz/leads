@@ -6,7 +6,9 @@ const openai = new OpenAI({
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
+    console.log('Received POST request to /api/transcribe');
     const { imageUrl } = req.body;
+    console.log('Image URL received:', imageUrl);
 
     try {
       const response = await openai.chat.completions.create({
@@ -28,6 +30,7 @@ export default async function handler(req, res) {
       });
 
       const transcription = response.choices[0].message.content;
+      console.log('Transcription received:', transcription);
       res.status(200).json({ transcription });
     } catch (error) {
       console.error('Error transcribing image:', error);

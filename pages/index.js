@@ -54,7 +54,7 @@ const Home = () => {
               </div>
               {generatedImageSrc && (
                 <div className="flex justify-center space-x-4 mt-4">
-                                <button
+                  <button
                     onClick={toggleImage}
                     className={`px-4 py-2 rounded-lg shadow transition ${showGeneratedImage ? 'bg-green-500 text-white hover:bg-green-600' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
                   >
