@@ -14,12 +14,12 @@ export default async function handler(req, res) {
 
     // Decode the base64 image
     const base64Data = Buffer.from(image.replace(/^data:image\/\w+;base64,/, ''), 'base64');
-    const type = image.split(';')[0].split('/')[1];
+    const type = 'png'; // Force the image type to be PNG
     console.log('Image type:', type);
 
     const params = {
       Bucket: process.env.AWS_S3_BUCKET_NAME,
-      Key: `uploads/${Date.now()}.${type}`,
+      Key: `uploads/${Date.now()}.png`, // Save the image with .png extension
       Body: base64Data,
       ContentEncoding: 'base64',
       ContentType: `image/${type}`,
