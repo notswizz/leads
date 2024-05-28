@@ -26,7 +26,7 @@ export default async function handler(req, res) {
       const { Location } = await s3.upload(params).promise();
       res.status(200).json({ imageUrl: Location });
     } catch (error) {
-      console.error(error);
+      console.error('Error uploading image:', error);
       res.status(500).json({ error: 'Error uploading image' });
     }
   } else {
