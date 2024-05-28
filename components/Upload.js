@@ -17,6 +17,11 @@ const Upload = ({ imageSrc, setImageUrl }) => {
         body: JSON.stringify({ prompt: 'a white siamese cat', filter: selectedFilter }),
       });
 
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Error: ${response.status} ${response.statusText} - ${errorText}`);
+      }
+
       const data = await response.json();
       setImageUrl(data.imageUrl);
       setIsUploaded(true);
