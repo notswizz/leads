@@ -1,8 +1,17 @@
+// pages/api/generate-image.js
 import OpenAI from 'openai';
+import aws from 'aws-sdk';
+import fetch from 'node-fetch';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
   timeout: 60000, // Set a longer timeout (60 seconds)
+});
+
+const s3 = new aws.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
 });
 
 export default async function handler(req, res) {
@@ -19,7 +28,22 @@ export default async function handler(req, res) {
         });
 
         const imageUrl = response.data[0].url;
-        res.status(200).json({ imageUrl });
+
+        // Fetch the image data from the OpenAI generated URL
+        const imageResponse = await fetch(imageUrl);
+        const imageBuffer = await imageResponse.buffer();
+
+        // Upload the image to S3
+        const params = {
+          Bucket: process.env.AWS_S3_BUCKET_NAME,
+          Key: `uploads/${Date.now()}.png`, // Save the image with .png extension
+          Body: imageBuffer,
+          ContentType: 'image/png',
+        };
+
+        const { Location } = await s3.upload(params).promise();
+
+        res.status(200).json({ imageUrl: Location });
       } catch (error) {
         if (retryCount < 3) {
           console.warn(`Retrying image generation (${retryCount + 1}/3)`);
