@@ -44,7 +44,7 @@ const Home = () => {
           <Upload imageSrc={imageSrc} setImageUrl={setImageUrl} setIsImageSelected={setIsImageSelected} setSelectedFilter={setSelectedFilter} />
           {imageSrc && (
             <div className="text-center mt-4 p-4 bg-gray-100 rounded-lg shadow-lg">
-              <h2 className="text-xl font-semibold mb-2">Image:</h2>
+              <h2 className="text-xl font-semibold mb-2">AI Image:</h2>
               <div className={`border-4 p-2 rounded-lg ${showGeneratedImage ? 'border-dashed border-blue-500' : 'border-solid border-green-500'}`}>
                 <img
                   src={showGeneratedImage && generatedImageSrc ? generatedImageSrc : imageSrc}
