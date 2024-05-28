@@ -13,6 +13,7 @@
     "@aws-sdk/s3-request-presigner": "^3.583.0",
     "aws-sdk": "^2.1628.0",
     "axios": "^1.7.2",
+    "browser-image-compression": "^2.0.2",
     "formidable": "^3.5.1",
     "micro": "^10.0.1",
     "mongodb": "^6.6.2",

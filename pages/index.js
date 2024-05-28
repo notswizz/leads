@@ -32,6 +32,7 @@ const Home = () => {
       <Header />
       {!isImageSelected && (
         <>
+          <Camera setImageSrc={setImageSrc} setIsImageSelected={setIsImageSelected} />
           <button
             onClick={() => setShowPostFeed(!showPostFeed)}
             className="w-full px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-full shadow-md hover:from-gray-600 hover:to-gray-800 transition-transform transform hover:scale-105 text-2xl font-bold text-center border-2 border-gray-600 overflow-hidden"
@@ -41,7 +42,6 @@ const Home = () => {
             </div>
           </button>
           {showPostFeed && <PostDisplay />}
-          <Camera setImageSrc={setImageSrc} setIsImageSelected={setIsImageSelected} />
         </>
       )}
       {isImageSelected && (
@@ -73,32 +73,32 @@ const Home = () => {
                     <button
                       onClick={toggleImage}
                       className={`px-4 py-2 rounded-lg shadow transition ${showGeneratedImage ? 'bg-green-500 text-white hover:bg-green-600' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
-                      >
-                        {showGeneratedImage ? 'Show Original' : 'Show AI'}
-                      </button>
-                      <Post imageUrl={imageUrl} generatedImageSrc={generatedImageSrc} transcription={transcription} />
-                    </div>
-                  )}
-                </div>
-              )}
-              <Transcribe imageUrl={imageUrl} setTranscription={setTranscription} setIsTranscribing={setIsTranscribing} />
-              <GenerateImage transcription={transcription} filter={selectedFilter} setGeneratedImageSrc={setGeneratedImageSrc} />
-              {isTranscribing && (
-                <div className="w-full flex justify-center">
-                  <ClipLoader color="#09f" />
-                </div>
-              )}
-              {transcription && (
-                <div className="text-center mt-4 p-4 bg-gray-700 rounded-lg shadow-lg max-h-32 overflow-y-auto">
-                  <h2 className="text-xl font-semibold mb-2 text-white">Transcription:</h2>
-                  <p className="mt-2 text-gray-300">{transcription}</p>
-                </div>
-              )}
-            </div>
+                    >
+                      {showGeneratedImage ? 'Show Original' : 'Show AI'}
+                    </button>
+                    <Post imageUrl={imageUrl} generatedImageSrc={generatedImageSrc} transcription={transcription} />
+                  </div>
+                )}
+              </div>
+            )}
+            <Transcribe imageUrl={imageUrl} setTranscription={setTranscription} setIsTranscribing={setIsTranscribing} />
+            <GenerateImage transcription={transcription} filter={selectedFilter} setGeneratedImageSrc={setGeneratedImageSrc} />
+            {isTranscribing && (
+              <div className="w-full flex justify-center">
+                <ClipLoader color="#09f" />
+              </div>
+            )}
+            {transcription && (
+              <div className="text-center mt-4 p-4 bg-gray-700 rounded-lg shadow-lg max-h-32 overflow-y-auto">
+                <h2 className="text-xl font-semibold mb-2 text-white">Transcription:</h2>
+                <p className="mt-2 text-gray-300">{transcription}</p>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-    );
-  };
-  
-  export default Home;
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Home;

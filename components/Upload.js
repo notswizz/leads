@@ -1,21 +1,39 @@
 import React, { useState } from 'react';
+import imageCompression from 'browser-image-compression';
 import { ClipLoader } from 'react-spinners';
 
-const Upload = ({ imageSrc, setImageUrl, setSelectedFilter }) => {
+const Upload = ({ imageSrc, setImageUrl, setIsImageSelected, setSelectedFilter }) => {
   const [isUploading, setIsUploading] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
   const [selectedFilter, setSelectedFilterLocal] = useState('');
+
+  const compressImage = async (imageFile) => {
+    const options = {
+      maxSizeMB: 1, // Set the maximum size in MB
+      maxWidthOrHeight: 1920, // Set the maximum width or height
+      useWebWorker: true, // Use web worker for faster compression
+    };
+
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      const base64Image = await imageCompression.getDataUrlFromFile(compressedFile);
+      return base64Image;
+    } catch (error) {
+      console.error('Error compressing image:', error);
+    }
+  };
 
   const uploadImage = async () => {
     setIsUploading(true);
     console.log('Uploading image...');
     try {
+      const compressedBase64Image = await compressImage(imageSrc); // Compress image before upload
       const response = await fetch('/api/upload', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ image: imageSrc, filter: selectedFilter }),
+        body: JSON.stringify({ image: compressedBase64Image, filter: selectedFilter }),
       });
 
       const data = await response.json();

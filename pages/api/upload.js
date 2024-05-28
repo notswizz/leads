@@ -6,6 +6,14 @@ const s3 = new aws.S3({
   region: process.env.AWS_REGION,
 });
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb', // Set desired size limit here
+    },
+  },
+};
+
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     console.log('Received POST request to /api/upload');
