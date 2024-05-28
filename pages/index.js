@@ -16,11 +16,10 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
-      <div>
-  <h1 className="text-4xl font-extrabold text-center text-gray-900">
-    k<span className="text-blue-500">A</span>le<span className="text-blue-500">I</span>doscope
-  </h1>
-</div>
+        <div>
+          <h1 className="text-4xl font-extrabold text-center text-gray-900">Image Capture and Processing</h1>
+         
+        </div>
         <div className="bg-white p-6 rounded-lg shadow-lg space-y-6">
           <Camera setImageSrc={setImageSrc} isImageSelected={isImageSelected} />
           <Upload imageSrc={imageSrc} setImageUrl={setImageUrl} setIsImageSelected={setIsImageSelected} />
