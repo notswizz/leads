@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import Post from '../components/Post';
 import PostDisplay from '../components/PostDisplay';
 import { ClipLoader } from 'react-spinners';
+import Modal from 'react-modal';
 
 const Home = () => {
   const [imageSrc, setImageSrc] = useState(null);
@@ -34,14 +35,11 @@ const Home = () => {
         <>
           <Camera setImageSrc={setImageSrc} setIsImageSelected={setIsImageSelected} />
           <button
-            onClick={() => setShowPostFeed(!showPostFeed)}
-            className="w-full px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-full shadow-md hover:from-gray-600 hover:to-gray-800 transition-transform transform hover:scale-105 text-2xl font-bold text-center border-2 border-gray-600 overflow-hidden"
+            onClick={() => setShowPostFeed(true)}
+            className="w-full max-w-xs px-6 py-3 mt-4 bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-full shadow-md hover:from-gray-600 hover:to-gray-800 transition-transform transform hover:scale-105 text-xl font-bold text-center border-2 border-gray-600 overflow-hidden"
           >
-            <div className="relative whitespace-nowrap">
-              Show Post Feed
-            </div>
+            SCOPES
           </button>
-          {showPostFeed && <PostDisplay />}
         </>
       )}
       {isImageSelected && (
@@ -50,7 +48,7 @@ const Home = () => {
             {generatedImageSrc && (
               <button
                 onClick={startOver}
-                className="px-4 py-2 bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-full shadow-md hover:from-gray-600 hover:to-gray-800 transition-transform transform hover:scale-105 text-sm font-bold absolute top-0 right-0 mt-2 mr-2"
+                className="px-2 py-2 bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-full shadow-md hover:from-gray-600 hover:to-gray-800 transition-transform transform hover:scale-105 text-sm font-bold absolute top-0 right-0 mt-2 mr-2"
               >
                 Start Over
               </button>
@@ -97,8 +95,19 @@ const Home = () => {
           </div>
         </div>
       )}
+      <Modal
+        isOpen={showPostFeed}
+        onRequestClose={() => setShowPostFeed(false)}
+        contentLabel="Post Feed"
+        className="Modal"
+        overlayClassName="Overlay"
+      >
+        <PostDisplay setShowPostFeed={setShowPostFeed} />
+      </Modal>
     </div>
   );
 };
+
+Modal.setAppElement('#__next'); // This is important for screen readers
 
 export default Home;
