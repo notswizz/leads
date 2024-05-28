@@ -2,6 +2,9 @@
     "functions": {
       "pages/api/generate-image.js": {
         "maxDuration": 60 
+      },
+      "pages/api/upload.js": {
+        "maxDuration": 60 
       }
     }
   }
