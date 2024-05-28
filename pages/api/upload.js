@@ -1,4 +1,5 @@
 import aws from 'aws-sdk';
+import { json } from 'micro';
 
 const s3 = new aws.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -6,9 +7,17 @@ const s3 = new aws.S3({
   region: process.env.AWS_REGION,
 });
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb', // Set desired size limit
+    },
+  },
+};
+
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { image } = req.body;
+    const { image } = await json(req);
 
     // Decode the base64 image
     const base64Data = Buffer.from(image.replace(/^data:image\/\w+;base64,/, ''), 'base64');
