@@ -1,15 +1,19 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import { ClipLoader } from 'react-spinners';
 
-const Camera = ({ setImageSrc }) => {
+const Camera = ({ setImageSrc, isImageSelected }) => {
   const fileInputRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
+      setIsLoading(true);
       const reader = new FileReader();
       reader.onload = (e) => {
         console.log('Image selected:', e.target.result);
         setImageSrc(e.target.result);
+        setIsLoading(false);
       };
       reader.readAsDataURL(file);
     }
@@ -17,15 +21,6 @@ const Camera = ({ setImageSrc }) => {
 
   return (
     <div className="flex flex-col items-center space-y-4">
-      <div className="relative w-full max-w-md overflow-hidden rounded-lg shadow-lg">
-        {fileInputRef.current && fileInputRef.current.files.length > 0 && (
-          <img
-            src={URL.createObjectURL(fileInputRef.current.files[0])}
-            alt="Selected"
-            className="w-full rounded-lg"
-          />
-        )}
-      </div>
       <input
         type="file"
         accept="image/*"
@@ -33,12 +28,15 @@ const Camera = ({ setImageSrc }) => {
         onChange={handleFileChange}
         className="hidden"
       />
-      <button
-        onClick={() => fileInputRef.current.click()}
-        className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition"
-      >
-        Select Picture
-      </button>
+      {!isLoading && !isImageSelected && (
+        <button
+          onClick={() => fileInputRef.current.click()}
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition"
+        >
+          Select Picture
+        </button>
+      )}
+      {isLoading && <ClipLoader color="#09f" />}
     </div>
   );
 };
