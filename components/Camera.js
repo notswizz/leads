@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 const Camera = ({ setImageSrc }) => {
   const fileInputRef = useRef(null);
+  const [isImageSelected, setIsImageSelected] = useState(false);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -10,6 +11,7 @@ const Camera = ({ setImageSrc }) => {
       reader.onload = (e) => {
         console.log('Image selected:', e.target.result);
         setImageSrc(e.target.result);
+        setIsImageSelected(true);
       };
       reader.readAsDataURL(file);
     }
@@ -17,15 +19,6 @@ const Camera = ({ setImageSrc }) => {
 
   return (
     <div className="flex flex-col items-center space-y-4">
-      <div className="relative w-full max-w-md overflow-hidden rounded-lg shadow-lg">
-        {fileInputRef.current && fileInputRef.current.files.length > 0 && (
-          <img
-            src={URL.createObjectURL(fileInputRef.current.files[0])}
-            alt="Selected"
-            className="w-full rounded-lg"
-          />
-        )}
-      </div>
       <input
         type="file"
         accept="image/*"
@@ -33,12 +26,17 @@ const Camera = ({ setImageSrc }) => {
         onChange={handleFileChange}
         className="hidden"
       />
-      <button
-        onClick={() => fileInputRef.current.click()}
-        className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition"
-      >
-        Select Picture
-      </button>
+      {!isImageSelected && (
+        <>
+        
+          <button
+            onClick={() => fileInputRef.current.click()}
+            className="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-full shadow-lg hover:from-blue-600 hover:to-indigo-600 transition-transform transform hover:scale-105"
+          >
+            Select Picture
+          </button>
+        </>
+      )}
     </div>
   );
 };
