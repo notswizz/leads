@@ -27,9 +27,7 @@ const Home = () => {
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center py-6 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-md w-full space-y-2 relative">
         <div className="flex justify-between items-center">
-          <h1 className="text-4xl font-extrabold text-center text-gray-900">
-            k<span className="text-blue-500">A</span>le<span className="text-blue-500">I</span>doscope
-          </h1>
+         
           {generatedImageSrc && (
             <button
               onClick={startOver}

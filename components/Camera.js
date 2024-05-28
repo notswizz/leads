@@ -22,7 +22,7 @@ const Camera = ({ setImageSrc }) => {
   };
 
   return (
-    <div className="flex flex-col items-center space-y-4">
+    <div className="flex flex-col items-center space-y-4 p-4 w-full max-w-sm mx-auto">
       <input
         type="file"
         accept="image/*"
@@ -34,9 +34,9 @@ const Camera = ({ setImageSrc }) => {
         <>
           <button
             onClick={() => fileInputRef.current.click()}
-            className="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-full shadow-lg hover:from-blue-600 hover:to-indigo-600 transition-transform transform hover:scale-105"
+            className="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-full shadow-lg hover:from-blue-600 hover:to-indigo-600 transition-transform transform hover:scale-105 text-4xl font-extrabold text-center"
           >
-            Select Picture
+            k<span className="text-pink-500">A</span>le<span className="text-pink-500">I</span>doscope
           </button>
         </>
       )}
