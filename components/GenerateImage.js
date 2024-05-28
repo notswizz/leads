@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const GenerateImage = ({ transcription, setGeneratedImageSrc }) => {
+const GenerateImage = ({ transcription, filter, setGeneratedImageSrc }) => {
   useEffect(() => {
     const generateImage = async () => {
       const response = await fetch('/api/generate-image', {
@@ -8,7 +8,7 @@ const GenerateImage = ({ transcription, setGeneratedImageSrc }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt: transcription }),
+        body: JSON.stringify({ prompt: transcription, filter }),
       });
 
       const data = await response.json();
@@ -18,7 +18,7 @@ const GenerateImage = ({ transcription, setGeneratedImageSrc }) => {
     if (transcription) {
       generateImage();
     }
-  }, [transcription, setGeneratedImageSrc]);
+  }, [transcription, filter, setGeneratedImageSrc]);
 
   return null;
 };

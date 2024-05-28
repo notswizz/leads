@@ -13,6 +13,7 @@ const Home = () => {
   const [isTranscribing, setIsTranscribing] = useState(false);
   const [isImageSelected, setIsImageSelected] = useState(false);
   const [showGeneratedImage, setShowGeneratedImage] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState('');
 
   const toggleImage = () => {
     setShowGeneratedImage(!showGeneratedImage);
@@ -40,7 +41,7 @@ const Home = () => {
         </div>
         <div className="bg-white p-6 rounded-lg shadow-lg space-y-2">
           <Camera setImageSrc={setImageSrc} isImageSelected={isImageSelected} />
-          <Upload imageSrc={imageSrc} setImageUrl={setImageUrl} setIsImageSelected={setIsImageSelected} />
+          <Upload imageSrc={imageSrc} setImageUrl={setImageUrl} setIsImageSelected={setIsImageSelected} setSelectedFilter={setSelectedFilter} />
           {imageSrc && (
             <div className="text-center mt-4 p-4 bg-gray-100 rounded-lg shadow-lg">
               <h2 className="text-xl font-semibold mb-2">Image:</h2>
@@ -53,7 +54,7 @@ const Home = () => {
               </div>
               {generatedImageSrc && (
                 <div className="flex justify-center space-x-4 mt-4">
-                  <button
+                                <button
                     onClick={toggleImage}
                     className={`px-4 py-2 rounded-lg shadow transition ${showGeneratedImage ? 'bg-green-500 text-white hover:bg-green-600' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
                   >
@@ -69,7 +70,7 @@ const Home = () => {
             </div>
           )}
           <Transcribe imageUrl={imageUrl} setTranscription={setTranscription} setIsTranscribing={setIsTranscribing} />
-          <GenerateImage transcription={transcription} setGeneratedImageSrc={setGeneratedImageSrc} />
+          <GenerateImage transcription={transcription} filter={selectedFilter} setGeneratedImageSrc={setGeneratedImageSrc} />
           {isTranscribing && (
             <div className="w-full flex justify-center">
               <ClipLoader color="#09f" />

@@ -1,26 +1,21 @@
 import React, { useState } from 'react';
 import { ClipLoader } from 'react-spinners';
 
-const Upload = ({ imageSrc, setImageUrl }) => {
+const Upload = ({ imageSrc, setImageUrl, setSelectedFilter }) => {
   const [isUploading, setIsUploading] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
-  const [selectedFilter, setSelectedFilter] = useState('');
+  const [selectedFilter, setSelectedFilterLocal] = useState('');
 
   const uploadImage = async () => {
     setIsUploading(true);
     try {
-      const response = await fetch('/api/generate-image', {
+      const response = await fetch('/api/upload', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt: 'a white siamese cat', filter: selectedFilter }),
+        body: JSON.stringify({ image: imageSrc, filter: selectedFilter }),
       });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Error: ${response.status} ${response.statusText} - ${errorText}`);
-      }
 
       const data = await response.json();
       setImageUrl(data.imageUrl);
@@ -32,13 +27,19 @@ const Upload = ({ imageSrc, setImageUrl }) => {
     }
   };
 
+  const handleFilterChange = (e) => {
+    const filter = e.target.value;
+    setSelectedFilterLocal(filter);
+    setSelectedFilter(filter); // Update the filter in the Home component
+  };
+
   return (
     <div className="flex flex-col items-center space-y-4 mt-4 w-full">
       {imageSrc && !isUploaded && !isUploading && (
         <>
           <select
             value={selectedFilter}
-            onChange={(e) => setSelectedFilter(e.target.value)}
+            onChange={handleFilterChange}
             className="w-full max-w-md px-4 py-2 rounded-lg shadow transition bg-white border border-gray-300"
           >
             <option value="">Select a filter</option>
