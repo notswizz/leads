@@ -1,27 +1,11 @@
 import React, { useState } from 'react';
-import imageCompression from 'browser-image-compression';
 import { ClipLoader } from 'react-spinners';
+import { compressImage } from '../utils/compress';
 
 const Upload = ({ imageSrc, setImageUrl, setIsImageSelected, setSelectedFilter }) => {
   const [isUploading, setIsUploading] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
   const [selectedFilter, setSelectedFilterLocal] = useState('');
-
-  const compressImage = async (imageFile) => {
-    const options = {
-      maxSizeMB: 1, // Set the maximum size in MB
-      maxWidthOrHeight: 1920, // Set the maximum width or height
-      useWebWorker: true, // Use web worker for faster compression
-    };
-
-    try {
-      const compressedFile = await imageCompression(imageFile, options);
-      const base64Image = await imageCompression.getDataUrlFromFile(compressedFile);
-      return base64Image;
-    } catch (error) {
-      console.error('Error compressing image:', error);
-    }
-  };
 
   const uploadImage = async () => {
     setIsUploading(true);
