@@ -12,3 +12,16 @@
   @apply bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-auto;
 }
 
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-scroll {
+  display: inline-block;
+  animation: scroll 5s linear infinite; /* Adjusted speed for faster scrolling */
+}
