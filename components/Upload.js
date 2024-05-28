@@ -5,6 +5,7 @@ const Upload = ({ imageSrc, setImageUrl }) => {
 
   const uploadImage = async () => {
     setIsUploading(true);
+    console.log('Starting upload...');
     try {
       const response = await fetch('/api/upload', {
         method: 'POST',
@@ -14,7 +15,12 @@ const Upload = ({ imageSrc, setImageUrl }) => {
         body: JSON.stringify({ image: imageSrc }),
       });
 
+      if (!response.ok) {
+        throw new Error(`Upload failed with status ${response.status}`);
+      }
+
       const data = await response.json();
+      console.log('Upload successful:', data);
       setImageUrl(data.imageUrl);
     } catch (error) {
       console.error('Error uploading image:', error);

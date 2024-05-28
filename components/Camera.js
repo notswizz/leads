@@ -8,6 +8,7 @@ const Camera = ({ setImageSrc }) => {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
+        console.log('Image captured:', e.target.result);
         setImageSrc(e.target.result);
       };
       reader.readAsDataURL(file);
