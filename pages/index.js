@@ -64,6 +64,7 @@ const Home = () => {
                     src={showGeneratedImage && generatedImageSrc ? generatedImageSrc : imageSrc}
                     alt={showGeneratedImage && generatedImageSrc ? 'Generated' : 'Original'}
                     className="mt-2 mx-auto rounded-lg shadow-lg"
+                    style={{ width: '100%', height: 'auto', maxWidth: '1024px', maxHeight: '1024px' }} // Adjust to match AI image size
                   />
                 </div>
                 {generatedImageSrc && (

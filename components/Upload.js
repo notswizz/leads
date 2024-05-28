@@ -48,9 +48,16 @@ const Upload = ({ imageSrc, setImageUrl, setIsImageSelected, setSelectedFilter }
           >
             <option value="">Select a filter</option>
             <option value="trippy 420">Trippy 420</option>
-            <option value="old timey retro">Old Timey Retro</option>
-            <option value="american pride">American Pride</option>
-            <option value="purple">Purple</option>
+<option value="old timey retro">Old Timey Retro</option>
+<option value="american pride">American Pride</option>
+<option value="realistic">Realistic</option>
+<option value="vintage vibes">Vintage Vibes</option>
+<option value="futuristic tech">Futuristic Tech</option>
+<option value="dreamy pastel">Dreamy Pastel</option>
+<option value="dark noir">Dark Noir</option>
+<option value="pop art">Pop Art</option>
+<option value="minimalist zen">Minimalist Zen</option>
+
           </select>
           <button
             onClick={uploadImage}
