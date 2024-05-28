@@ -2,6 +2,7 @@ import OpenAI from 'openai';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
+  timeout: 60000, // Set a longer timeout (60 seconds)
 });
 
 export default async function handler(req, res) {
@@ -12,7 +13,7 @@ export default async function handler(req, res) {
       try {
         const response = await openai.images.generate({
           model: "dall-e-3",
-          prompt: `${prompt}`,
+          prompt: `heavily emphasize filter: ${filter}. ${prompt}`,
           n: 1,
           size: "1024x1024",
         });
