@@ -8,7 +8,7 @@ const Camera = ({ setImageSrc }) => {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        console.log('Image captured:', e.target.result);
+        console.log('Image selected:', e.target.result);
         setImageSrc(e.target.result);
       };
       reader.readAsDataURL(file);
@@ -21,7 +21,7 @@ const Camera = ({ setImageSrc }) => {
         {fileInputRef.current && fileInputRef.current.files.length > 0 && (
           <img
             src={URL.createObjectURL(fileInputRef.current.files[0])}
-            alt="Captured"
+            alt="Selected"
             className="w-full rounded-lg"
           />
         )}
@@ -29,7 +29,6 @@ const Camera = ({ setImageSrc }) => {
       <input
         type="file"
         accept="image/*"
-        capture="environment"
         ref={fileInputRef}
         onChange={handleFileChange}
         className="hidden"
@@ -38,7 +37,7 @@ const Camera = ({ setImageSrc }) => {
         onClick={() => fileInputRef.current.click()}
         className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition"
       >
-        Take Picture
+        Select Picture
       </button>
     </div>
   );

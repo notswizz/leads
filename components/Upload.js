@@ -35,7 +35,7 @@ const Upload = ({ imageSrc, setImageUrl }) => {
         <>
           <img
             src={imageSrc}
-            alt="Captured"
+            alt="Selected"
             className="w-full max-w-md rounded-lg shadow-lg object-cover"
           />
           <button
