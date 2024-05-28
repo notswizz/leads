@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Upload = ({ imageSrc, setImageUrl }) => {
+const Upload = ({ imageSrc, setImageUrl, setTranscription }) => {
   const [isUploading, setIsUploading] = useState(false);
 
   const uploadImage = async () => {
@@ -16,6 +16,22 @@ const Upload = ({ imageSrc, setImageUrl }) => {
 
       const data = await response.json();
       setImageUrl(data.imageUrl);
+
+      // Transcribe the uploaded image
+      const transcribeResponse = await fetch('/api/transcribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ imageUrl: data.imageUrl }),
+      });
+
+      const transcribeData = await transcribeResponse.json();
+      if (transcribeResponse.ok) {
+        setTranscription(transcribeData.transcription);
+      } else {
+        console.error('Error transcribing image:', transcribeData.error);
+      }
     } catch (error) {
       console.error('Error uploading image:', error);
     } finally {
