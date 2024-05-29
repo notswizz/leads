@@ -1,4 +1,3 @@
-// pages/api/post.js
 import clientPromise from '../../utils/mongodb';
 
 export default async function handler(req, res) {
@@ -14,6 +13,7 @@ export default async function handler(req, res) {
         imageUrl,
         generatedImageUrl,
         transcription,
+        points: 1, // Initialize points to 1
         createdAt: new Date(),
       });
 
