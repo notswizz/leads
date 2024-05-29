@@ -66,11 +66,11 @@ const PostDisplay = ({ setShowPostFeed }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50" onClick={() => setShowPostFeed(false)}>
-      <div className="max-h-screen w-full max-w-3xl mx-auto bg-gray-900 rounded-lg shadow-xl overflow-y-auto p-2 relative" onClick={(e) => e.stopPropagation()}>
+      <div className="max-h-screen w-full max-w-3xl mx-auto bg-gray-900 rounded-lg shadow-xl overflow-y-auto p-2 py-12 relative" onClick={(e) => e.stopPropagation()}>
         <div className="sticky top-0 bg-gray-800 p-4 z-10">
           <button
             onClick={() => setShowPostFeed(false)}
-            className="px-2 py-4 bg-red-500 text-white rounded shadow-lg hover:bg-red-600 transition-all w-full"
+            className="px- py-4 bg-red-400 text-black rounded shadow-lg hover:bg-red-600 transition-all w-full"
           >
             Close
           </button>
