@@ -73,10 +73,6 @@ const PostDisplay = ({ setShowPostFeed }) => {
     setFilterOption(value);
   };
 
-  if (posts.length === 0) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50" onClick={() => setShowPostFeed(false)}>
       <div className="max-h-screen w-full max-w-3xl mx-auto bg-gray-900 rounded-lg shadow-xl overflow-y-auto relative" onClick={(e) => e.stopPropagation()}>
@@ -85,42 +81,46 @@ const PostDisplay = ({ setShowPostFeed }) => {
           Click on the image to toggle original and AI
         </div>
         <div className="space-y-6 p-4">
-          {posts.map((post) => (
-            <div key={post._id} className="bg-gray-800 p-6 rounded-lg shadow-lg space-y-4">
-              <div
-                className={`border-4 p-2 rounded-lg ${showGeneratedImages[post._id] ? 'border-dashed border-blue-500' : 'border-solid border-green-500'}`}
-                onClick={() => toggleImage(post._id)}
-              >
-                <img
-                  src={showGeneratedImages[post._id] ? post.generatedImageUrl : post.imageUrl}
-                  alt={showGeneratedImages[post._id] ? 'Generated' : 'Original'}
-                  className="mt-2 mx-auto rounded-lg shadow-lg cursor-pointer"
-                  style={{ width: '100%', height: 'auto', maxWidth: '1024px', maxHeight: '1024px' }} // Adjust to match AI image size
-                />
-              </div>
-              <div className="flex justify-between items-center mt-4">
-                <div className="text-white font-semibold text-lg">Points: {post.points}</div>
-                <div className="flex space-x-2">
-                  <button
-                    onClick={() => updatePoints(post._id, 1)}
-                    className={`px-2 py-1 bg-green-500 text-white rounded-full hover:bg-green-600 transition-all flex items-center justify-center ${votedPosts[post._id] ? 'opacity-50 cursor-not-allowed' : ''}`}
-                    style={{ width: '40px', height: '40px' }}
-                    disabled={votedPosts[post._id]}
-                  >
-                    👍
-                  </button>
-                  <button
-                    onClick={() => updatePoints(post._id, -1)}
-                    className={`px-2 py-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition-all flex items-center justify-center ${votedPosts[post._id] ? 'opacity-50 cursor-not-allowed' : ''}`}
-                    style={{ width: '40px', height: '40px' }}
-                    disabled={votedPosts[post._id]}
-                  >
-                    👎
-                  </button>
+          {posts.length === 0 ? (
+            <div className="text-center text-gray-400">No posts found for the selected filter.</div>
+          ) : (
+            posts.map((post) => (
+              <div key={post._id} className="bg-gray-800 p-6 rounded-lg shadow-lg space-y-4">
+                <div
+                  className={`border-4 p-2 rounded-lg ${showGeneratedImages[post._id] ? 'border-dashed border-blue-500' : 'border-solid border-green-500'}`}
+                  onClick={() => toggleImage(post._id)}
+                >
+                  <img
+                    src={showGeneratedImages[post._id] ? post.generatedImageUrl : post.imageUrl}
+                    alt={showGeneratedImages[post._id] ? 'Generated' : 'Original'}
+                    className="mt-2 mx-auto rounded-lg shadow-lg cursor-pointer"
+                    style={{ width: '100%', height: 'auto', maxWidth: '1024px', maxHeight: '1024px' }} // Adjust to match AI image size
+                  />
+                </div>
+                <div className="flex justify-between items-center mt-4">
+                  <div className="text-white font-semibold text-lg">Points: {post.points}</div>
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={() => updatePoints(post._id, 1)}
+                      className={`px-2 py-1 bg-green-500 text-white rounded-full hover:bg-green-600 transition-all flex items-center justify-center ${votedPosts[post._id] ? 'opacity-50 cursor-not-allowed' : ''}`}
+                      style={{ width: '40px', height: '40px' }}
+                      disabled={votedPosts[post._id]}
+                    >
+                      👍
+                    </button>
+                    <button
+                      onClick={() => updatePoints(post._id, -1)}
+                      className={`px-2 py-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition-all flex items-center justify-center ${votedPosts[post._id] ? 'opacity-50 cursor-not-allowed' : ''}`}
+                      style={{ width: '40px', height: '40px' }}
+                      disabled={votedPosts[post._id]}
+                    >
+                      👎
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </div>
