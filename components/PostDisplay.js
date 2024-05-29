@@ -81,7 +81,7 @@ const PostDisplay = ({ setShowPostFeed }) => {
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50" onClick={() => setShowPostFeed(false)}>
       <div className="max-h-screen w-full max-w-3xl mx-auto bg-gray-900 rounded-lg shadow-xl overflow-y-auto relative" onClick={(e) => e.stopPropagation()}>
         <Sticky onClose={() => setShowPostFeed(false)} onSortChange={handleSortChange} onFilterChange={handleFilterChange} />
-        <div className="text-center text-gray-400 text-sm mb-4 mt-2">
+        <div className="text-center text-gray-400 text-sm mb-4 mt-8">
           Click on the image to toggle original and AI
         </div>
         <div className="space-y-6 p-4">
