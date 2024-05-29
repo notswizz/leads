@@ -86,6 +86,10 @@ const PostDisplay = ({ setShowPostFeed }) => {
           ) : (
             posts.map((post) => (
               <div key={post._id} className="bg-gray-800 p-6 rounded-lg shadow-lg space-y-4">
+                <div className="flex justify-between items-center">
+                  <span className="bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">{post.filter}</span>
+                  <div className="text-white font-semibold text-lg">Points: {post.points}</div>
+                </div>
                 <div
                   className={`border-4 p-2 rounded-lg ${showGeneratedImages[post._id] ? 'border-dashed border-blue-500' : 'border-solid border-green-500'}`}
                   onClick={() => toggleImage(post._id)}
@@ -98,7 +102,6 @@ const PostDisplay = ({ setShowPostFeed }) => {
                   />
                 </div>
                 <div className="flex justify-between items-center mt-4">
-                  <div className="text-white font-semibold text-lg">Points: {post.points}</div>
                   <div className="flex space-x-2">
                     <button
                       onClick={() => updatePoints(post._id, 1)}
