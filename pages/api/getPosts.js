@@ -3,15 +3,15 @@ import clientPromise from '../../utils/mongodb';
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     const { sort, filter } = req.query;
-    
+
     try {
       const client = await clientPromise;
       const db = client.db('scopes');
       const collection = db.collection('posts');
-      
+
       let query = {};
       if (filter) {
-        query = { transcription: { $regex: filter, $options: 'i' } }; // Example filter based on transcription content
+        query = { filter: { $regex: filter, $options: 'i' } };
       }
 
       let sortOption = {};

@@ -65,12 +65,12 @@ const PostDisplay = ({ setShowPostFeed }) => {
     }
   };
 
-  const handleSortChange = (event) => {
-    setSortOption(event.target.value);
+  const handleSortChange = (value) => {
+    setSortOption(value);
   };
 
-  const handleFilterChange = (event) => {
-    setFilterOption(event.target.value);
+  const handleFilterChange = (value) => {
+    setFilterOption(value);
   };
 
   if (posts.length === 0) {

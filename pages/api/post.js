@@ -2,7 +2,7 @@ import clientPromise from '../../utils/mongodb';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { imageUrl, generatedImageUrl, transcription } = req.body;
+    const { imageUrl, generatedImageUrl, transcription, filter } = req.body;
 
     try {
       const client = await clientPromise;
@@ -13,6 +13,7 @@ export default async function handler(req, res) {
         imageUrl,
         generatedImageUrl,
         transcription,
+        filter,
         points: 1, // Initialize points to 1
         createdAt: new Date(),
       });

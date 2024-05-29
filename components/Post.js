@@ -1,8 +1,7 @@
-// components/Post.js
 import React, { useState } from 'react';
 import { ClipLoader } from 'react-spinners';
 
-const Post = ({ imageUrl, generatedImageSrc, transcription }) => {
+const Post = ({ imageUrl, generatedImage, transcription }) => {
   const [isPosting, setIsPosting] = useState(false);
 
   const handlePost = async () => {
@@ -14,7 +13,12 @@ const Post = ({ imageUrl, generatedImageSrc, transcription }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ imageUrl, generatedImageUrl: generatedImageSrc, transcription }),
+        body: JSON.stringify({ 
+          imageUrl, 
+          generatedImageUrl: generatedImage.imageUrl, 
+          transcription, 
+          filter: generatedImage.filter 
+        }),
       });
 
       const postData = await postResponse.json();

@@ -13,7 +13,7 @@ const Home = () => {
   const [imageSrc, setImageSrc] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const [transcription, setTranscription] = useState('');
-  const [generatedImageSrc, setGeneratedImageSrc] = useState(null);
+  const [generatedImage, setGeneratedImage] = useState(null); // Updated to store image and filter together
   const [isTranscribing, setIsTranscribing] = useState(false);
   const [isImageSelected, setIsImageSelected] = useState(false);
   const [showGeneratedImage, setShowGeneratedImage] = useState(false);
@@ -45,7 +45,7 @@ const Home = () => {
       {isImageSelected && (
         <div className="max-w-md w-full space-y-4 relative mt-8">
           <div className="flex justify-between items-center">
-            {generatedImageSrc && (
+            {generatedImage && (
               <button
                 onClick={startOver}
                 className="px-2 py-2 bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-full shadow-md hover:from-gray-600 hover:to-gray-800 transition-transform transform hover:scale-105 text-sm font-bold absolute top-0 right-0 mt-2 mr-2"
@@ -60,13 +60,13 @@ const Home = () => {
               <div className="text-center mt-4 p-4 bg-gray-700 rounded-lg shadow-lg">
                 <div className={`border-4 p-2 rounded-lg ${showGeneratedImage ? 'border-dashed border-blue-500' : 'border-solid border-green-500'}`}>
                   <img
-                    src={showGeneratedImage && generatedImageSrc ? generatedImageSrc : imageSrc}
-                    alt={showGeneratedImage && generatedImageSrc ? 'Generated' : 'Original'}
+                    src={showGeneratedImage && generatedImage ? generatedImage.imageUrl : imageSrc}
+                    alt={showGeneratedImage && generatedImage ? 'Generated' : 'Original'}
                     className="mt-2 mx-auto rounded-lg shadow-lg"
                     style={{ width: '100%', height: 'auto', maxWidth: '1024px', maxHeight: '1024px' }} // Adjust to match AI image size
                   />
                 </div>
-                {generatedImageSrc && (
+                {generatedImage && (
                   <div className="flex justify-center space-x-4 mt-4">
                     <button
                       onClick={toggleImage}
@@ -74,19 +74,19 @@ const Home = () => {
                     >
                       {showGeneratedImage ? 'Show Original' : 'Show AI'}
                     </button>
-                    <Post imageUrl={imageUrl} generatedImageSrc={generatedImageSrc} transcription={transcription} />
+                    <Post imageUrl={imageUrl} generatedImage={generatedImage} transcription={transcription} />
                   </div>
                 )}
               </div>
             )}
-            {transcription && !generatedImageSrc && (
+            {transcription && !generatedImage && (
               <div className="w-full flex justify-center">
                 <p className="text-white text-xl">Generating image...</p>
                 <ClipLoader color="#09f" />
               </div>
             )}
             <Transcribe imageUrl={imageUrl} setTranscription={setTranscription} setIsTranscribing={setIsTranscribing} />
-            <GenerateImage transcription={transcription} filter={selectedFilter} setGeneratedImageSrc={setGeneratedImageSrc} />
+            <GenerateImage transcription={transcription} filter={selectedFilter} setGeneratedImage={setGeneratedImage} />
             {isTranscribing && (
               <div className="w-full flex justify-center">
                 <ClipLoader color="#09f" />

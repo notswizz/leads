@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const GenerateImage = ({ transcription, filter, setGeneratedImageSrc }) => {
+const GenerateImage = ({ transcription, filter, setGeneratedImage }) => {
   useEffect(() => {
     const generateImage = async () => {
       try {
@@ -17,7 +17,7 @@ const GenerateImage = ({ transcription, filter, setGeneratedImageSrc }) => {
         }
 
         const data = await response.json();
-        setGeneratedImageSrc(data.imageUrl);
+        setGeneratedImage({ imageUrl: data.imageUrl, filter: filter });
       } catch (error) {
         console.error('Error generating image:', error);
       }
@@ -26,7 +26,7 @@ const GenerateImage = ({ transcription, filter, setGeneratedImageSrc }) => {
     if (transcription) {
       generateImage();
     }
-  }, [transcription, filter, setGeneratedImageSrc]);
+  }, [transcription, filter, setGeneratedImage]);
 
   return null;
 };

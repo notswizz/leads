@@ -6,20 +6,25 @@ const Sticky = ({ onClose, onSortChange, onFilterChange }) => {
       <div className="flex items-center space-x-4">
         <select
           className="bg-gray-700 text-white rounded py-1 px-3 focus:outline-none focus:ring-2 focus:ring-pink-500"
-          onChange={onSortChange}
+          onChange={e => onSortChange(e.target.value)}
         >
           <option value="new">New</option>
           <option value="points">Points</option>
         </select>
         <select
           className="bg-gray-700 text-white rounded py-1 px-3 focus:outline-none focus:ring-2 focus:ring-pink-500"
-          onChange={onFilterChange}
+          onChange={e => onFilterChange(e.target.value)}
         >
           <option value="">All</option>
-          <option value="patriotic">Patriotic</option>
-          <option value="futuristic">Futuristic</option>
-          <option value="retro">Retro</option>
-          <option value="sunflower">Sunflower</option>
+          <option value="trippy 420">Trippy 420</option>
+          <option value="american pride">American Pride</option>
+          <option value="realistic">Realistic</option>
+          <option value="vintage vibes">Vintage Vibes</option>
+          <option value="futuristic tech">Futuristic Tech</option>
+          <option value="dreamy pastel">Dreamy Pastel</option>
+          <option value="dark noir">Dark Noir</option>
+          <option value="pop art">Pop Art</option>
+          <option value="minimalist zen">Minimalist Zen</option>
         </select>
       </div>
       <button
