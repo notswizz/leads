@@ -48,7 +48,6 @@ const Upload = ({ imageSrc, setImageUrl, setIsImageSelected, setSelectedFilter }
           >
             <option value="">Select a filter</option>
             <option value="trippy 420">Trippy 420</option>
-<option value="old timey retro">Old Timey Retro</option>
 <option value="american pride">American Pride</option>
 <option value="realistic">Realistic</option>
 <option value="vintage vibes">Vintage Vibes</option>

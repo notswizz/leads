@@ -58,7 +58,7 @@ const Home = () => {
             <Upload imageSrc={imageSrc} setImageUrl={setImageUrl} setIsImageSelected={setIsImageSelected} setSelectedFilter={setSelectedFilter} />
             {imageSrc && (
               <div className="text-center mt-4 p-4 bg-gray-700 rounded-lg shadow-lg">
-                <h2 className="text-xl font-semibold mb-2 text-white">AI Image:</h2>
+          
                 <div className={`border-4 p-2 rounded-lg ${showGeneratedImage ? 'border-dashed border-blue-500' : 'border-solid border-green-500'}`}>
                   <img
                     src={showGeneratedImage && generatedImageSrc ? generatedImageSrc : imageSrc}
@@ -80,7 +80,14 @@ const Home = () => {
                 )}
               </div>
             )}
+            {transcription && !generatedImageSrc  && (
+              <div className="w-full flex justify-center">
+                <p className="text-white text-xl">Generating image...</p>
+                <ClipLoader color="#09f" />
+              </div>
+            )}
             <Transcribe imageUrl={imageUrl} setTranscription={setTranscription} setIsTranscribing={setIsTranscribing} />
+            
             <GenerateImage transcription={transcription} filter={selectedFilter} setGeneratedImageSrc={setGeneratedImageSrc} />
             {isTranscribing && (
               <div className="w-full flex justify-center">
@@ -89,7 +96,7 @@ const Home = () => {
             )}
             {transcription && (
               <div className="text-center mt-4 p-4 bg-gray-700 rounded-lg shadow-lg max-h-32 overflow-y-auto">
-                <h2 className="text-xl font-semibold mb-2 text-white">Transcription:</h2>
+              
                 <p className="mt-2 text-gray-300">{transcription}</p>
               </div>
             )}
